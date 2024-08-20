@@ -1,6 +1,6 @@
 import { Workbox } from 'workbox-window';
-import Editor from './editor';
-import './database';
+import Editor from './editor'; // Correctly import the Editor class
+import './database'; // This ensures your database setup runs
 import '../css/style.css';
 
 const main = document.querySelector('#main');
@@ -17,6 +17,7 @@ const loadSpinner = () => {
   main.appendChild(spinner);
 };
 
+// Instantiate the Editor
 const editor = new Editor();
 
 if (typeof editor === 'undefined') {
@@ -34,4 +35,3 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
-
