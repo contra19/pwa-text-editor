@@ -1,7 +1,7 @@
 import { getDb, putDb } from './database';
 import { header } from './header';
 
-export default class {
+export default class Editor {
   constructor() {
     const localData = localStorage.getItem('content');
 
@@ -20,38 +20,21 @@ export default class {
       tabSize: 2,
     });
 
-    // Load data from IndexedDB or fall back to localStorage or a default header
     getDb().then((data) => {
       console.info('Loaded data from IndexedDB, injecting into editor');
-    
-      // Check if `data` is null or undefined explicitly
-      let editorContent;
-      if (data !== null && data !== undefined) {
-        editorContent = data;
-      } else if (localData !== null && localData !== undefined) {
-        editorContent = localData;
-      } else {
-        editorContent = header;
-      }
-    
-      // Set the editor's content with the resolved value
+      const editorContent = data || localData || header;
       this.editor.setValue(editorContent);
     });
-    
 
     this.editor.on('change', () => {
-      // Save the current content to localStorage
-      localStorage.setItem('content', this.editor.getValue());
+      const content = this.editor.getValue();
+      localStorage.setItem('content', content);
     });
 
     this.editor.on('blur', () => {
       console.log('The editor has lost focus');
-      
-      // Get the content from the editor as a string
-      const editorContent = this.editor.getValue();
-      
-      // Pass the string content directly to putDb
-      putDb(editorContent);
+      const content = this.editor.getValue();
+      putDb(content);
     });
   }
 }
