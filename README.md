@@ -34,6 +34,8 @@ Just Another Text Editor (J.A.T.E.) is a progressive web application (PWA) that 
 
 ## Installation
 
+This project can be viewed at the foolowing link as a deplyed app on Render: [PWA Text Editor](https://just-another-text-editor-yce1.onrender.com)
+
 To install and run this project locally, follow these steps:
 
 1. **Clone the repository**:
